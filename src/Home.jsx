@@ -230,9 +230,9 @@ function AboutPage() {
                         <h2 className='text-4xl md:text-5xl font-black text-gray-900 mb-6'>درباره <span className='text-[#4038C9] relative'>من<span className="absolute bottom-1 left-0 w-full h-2 bg-[#FFCA0C]/40 -z-10 rounded"></span></span></h2>
                         <p className='text-gray-600 text-lg leading-loose mb-8 text-justify whitespace-pre-wrap'>{lawyerBio}</p>
                         <div className='grid grid-cols-1 sm:grid-cols-3 gap-4 w-full mb-8'>
-                            <TwoElementCard icon={bookIcon} text="تخصص چندگانه"/>
-                            <TwoElementCard icon={caseIcon} text="۵۰۰+ پرونده موفق"/>
-                            <TwoElementCard icon={medalIcon} text="۱۵+ سال تجربه"/>
+                            <TwoElementCard icon={bookIcon} text="کارشناسی حقوق"/>
+                            <TwoElementCard icon={caseIcon} text="ارشد حقوق جزا و جرم شناسی"/>
+                            <TwoElementCard icon={medalIcon} text="دکتری حقوق جزا و جرم شناسی"/>
                         </div>
                         <button onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })} className='group flex items-center gap-2 bg-[#4038C9] hover:bg-[#2C2699] text-white font-medium px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer'>
                             <span>ارتباط مستقیم با من</span>
