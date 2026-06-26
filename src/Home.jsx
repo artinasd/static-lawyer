@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-// YOUR EXACT ASSETS (Ensure they are inside src/assets/)
+// Assets
 import courtStuff from './assets/courtStuff.png';
 import emblem from './assets/classic.png';
 import lawyerHand from './assets/lawyerHand.png';
@@ -9,7 +9,7 @@ import caseIcon from './assets/caseIcon.png';
 import bookIcon from './assets/bookIcon.png';
 import fallbackPic from './assets/person1.jpg';
 
-// YOUR EXACT ICONS
+// Icons
 import BalanceIcon from '@mui/icons-material/Balance';
 import GavelIcon from '@mui/icons-material/Gavel';
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
@@ -26,25 +26,24 @@ import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 import AccessTimeOutlinedIcon from '@mui/icons-material/AccessTimeOutlined';
 import FormatQuoteRoundedIcon from '@mui/icons-material/FormatQuoteRounded';
 
-// --- YOUR CUSTOM UI COMPONENTS ---
 function TwoElementCard(props) {
     return (
         <div className='bg-gray-50 p-4 rounded-lg flex flex-col items-center space-y-3 font-bold hover:scale-[101%] hover:shadow-sm transition'>
             <img className='w-10' src={props.icon} alt={props.text} />
-            <h3>{props.text}</h3>
+            <h3 className="text-gray-800 text-center">{props.text}</h3>
         </div>
     )
 }
 
 function ThreeElementCard(props) {
     return (
-        <div className='bg-white p-6 shadow-md rounded-lg hover:shadow-lg transition'>
-            <div className='bg-[#DEE7FF] rounded-full w-12 h-12 flex items-center justify-center'>
+        <div className='bg-white p-6 shadow-md rounded-lg hover:shadow-lg transition h-full flex flex-col'>
+            <div className='bg-[#DEE7FF] rounded-full w-12 h-12 flex items-center justify-center flex-shrink-0'>
                 {props.children}
             </div>
-            <div className='flex flex-col items-end'>
-                <h3 className='font-bold text-xl mt-2'>{props.title}</h3>
-                <p className='text-right mt-2 text-gray-700 rtl'>{props.description}</p>
+            <div className='flex flex-col items-start text-right mt-4 flex-grow'>
+                <h3 className='font-bold text-xl mb-2 text-gray-900'>{props.title}</h3>
+                <p className='text-gray-600 rtl leading-relaxed'>{props.description}</p>
             </div>
         </div>
     )
@@ -73,7 +72,6 @@ function FourElementCard(props) {
     );
 }
 
-// --- YOUR CONTACT COMPONENTS ---
 const ContactInfoData = [
     <div className='flex flex-row items-center gap-4 w-full'>
         <div className='rounded-full w-12 h-12 flex-shrink-0 bg-white/10 flex items-center justify-center'><LocationOnOutlinedIcon style={{color: '#FFCA0C'}} fontSize="medium" /></div>
@@ -81,11 +79,11 @@ const ContactInfoData = [
     </div>,
     <div className='flex flex-row items-center gap-4 w-full'>
         <div className='rounded-full w-12 h-12 flex-shrink-0 bg-white/10 flex items-center justify-center'><LocalPhoneOutlinedIcon style={{color: '#FFCA0C'}} fontSize="medium" /></div>
-        <div className='flex flex-col items-start text-right'><h3 className='text-lg font-bold text-white mb-1'>شماره تماس</h3><p className='text-gray-200 text-sm' dir="ltr">09124201285</p></div>
+        <div className='flex flex-col items-start text-right'><h3 className='text-lg font-bold text-white mb-1'>شماره تماس</h3><p className='text-gray-200 text-sm' dir="ltr">0912 000 0000</p></div>
     </div>,
     <div className='flex flex-row items-center gap-4 w-full'>
         <div className='rounded-full w-12 h-12 flex-shrink-0 bg-white/10 flex items-center justify-center'><EmailOutlinedIcon style={{color: '#FFCA0C'}} fontSize="medium" /></div>
-        <div className='flex flex-col items-start text-right'><h3 className='text-lg font-bold text-white mb-1'>آدرس ایمیل</h3><p className='text-gray-200 text-sm'>chalaki.ebrahim@gmail.com</p></div>
+        <div className='flex flex-col items-start text-right'><h3 className='text-lg font-bold text-white mb-1'>آدرس ایمیل</h3><p className='text-gray-200 text-sm'>info@lawyer-site.ir</p></div>
     </div>,
     <div className='flex flex-row items-center gap-4 w-full'>
         <div className='rounded-full w-12 h-12 flex-shrink-0 bg-white/10 flex items-center justify-center'><AccessTimeOutlinedIcon style={{color: '#FFCA0C'}} fontSize="medium" /></div>
@@ -96,7 +94,7 @@ const ContactInfoData = [
 function ContactInfo() {
     return (
         <div className='w-full flex flex-col items-start h-fit' dir="rtl">
-            <ul className='w-full space-y-8'>{ContactInfoData.map((item, index) => <li className='w-full flex' key={index}><>{item}</></li>)}</ul>
+            <ul className='w-full space-y-8'>{ContactInfoData.map((item, index) => <li className='w-full flex' key={index}>{item}</li>)}</ul>
         </div>
     )
 }
@@ -112,7 +110,6 @@ function ContactForm() {
         e.preventDefault();
         setLoading(true);
         setStatus(null);
-        // STATIC MOCK: Simulating server response locally
         setTimeout(() => {
             setStatus('success');
             setFormData({ name: '', email: '', phone: '', subject: '', content: '' });
@@ -123,17 +120,17 @@ function ContactForm() {
     return (
         <div className='bg-white rounded-xl p-8 shadow-md col-span-1'>
             <h2 className='text-2xl font-bold rtl'>فرم تماس</h2><br/>
-            {status === 'success' && <div className="bg-green-100 text-green-700 p-3 rounded-md mb-4 rtl">پیام شما با موفقیت ارسال شد. در اسرع وقت پاسخگو خواهیم بود.</div>}
+            {status === 'success' && <div className="bg-green-100 text-green-700 p-3 rounded-md mb-4 rtl font-medium border border-green-200">پیام شما با موفقیت ارسال شد. در اسرع وقت پاسخگو خواهیم بود.</div>}
             <form onSubmit={handleSubmit}>
-                <div className='grid grid-cols-2 gap-10'>
-                    <div className="flex flex-col rtl"><label className="font-medium text-gray-700 mb-2">ایمیل</label><input required type="email" name="email" value={formData.email} onChange={handleChange} className="w-full placeholder:text-sm border border-gray-300 rounded-md px-3 py-2 focus:outline-blue-600 transition" placeholder="آدرس ایمیل خود را وارد نمایید" /></div>
-                    <div className="flex flex-col rtl"><label className="font-medium text-gray-700 mb-2">نام و نام خانوادگی</label><input required type="text" name="name" value={formData.name} onChange={handleChange} className="w-full placeholder:text-sm border border-gray-300 rounded-md px-3 py-2 focus:outline-blue-600 transition" placeholder="نام و نام خانوادگی" /></div>
+                <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
+                    <div className="flex flex-col rtl"><label className="font-medium text-gray-700 mb-2">ایمیل</label><input required type="email" name="email" value={formData.email} onChange={handleChange} className="w-full placeholder:text-sm border border-gray-300 rounded-md px-3 py-2 focus:outline-[#4038C9] transition" placeholder="آدرس ایمیل خود را وارد نمایید" /></div>
+                    <div className="flex flex-col rtl"><label className="font-medium text-gray-700 mb-2">نام و نام خانوادگی</label><input required type="text" name="name" value={formData.name} onChange={handleChange} className="w-full placeholder:text-sm border border-gray-300 rounded-md px-3 py-2 focus:outline-[#4038C9] transition" placeholder="نام و نام خانوادگی" /></div>
                 </div><br/>
-                <div className="flex flex-col rtl"><label className="font-medium text-gray-700 mb-2">شماره تماس</label><input type="tel" name="phone" value={formData.phone} onChange={handleChange} className="w-full placeholder:text-sm border border-gray-300 rounded-md px-3 py-2 focus:outline-blue-600 transition" placeholder="شماره تماس خود را وارد نمایید" /></div><br/>
-                <div className="flex flex-col rtl"><label className="font-medium text-gray-700 mb-2">موضوع</label><input required type="text" name="subject" value={formData.subject} onChange={handleChange} className="w-full placeholder:text-sm border border-gray-300 rounded-md px-3 py-2 focus:outline-blue-600 transition" placeholder="موضوع پیام خود را وارد نمایید" /></div><br/>
+                <div className="flex flex-col rtl"><label className="font-medium text-gray-700 mb-2">شماره تماس</label><input type="tel" name="phone" value={formData.phone} onChange={handleChange} className="w-full placeholder:text-sm border border-gray-300 rounded-md px-3 py-2 focus:outline-[#4038C9] transition" placeholder="شماره تماس خود را وارد نمایید" /></div><br/>
+                <div className="flex flex-col rtl"><label className="font-medium text-gray-700 mb-2">موضوع</label><input required type="text" name="subject" value={formData.subject} onChange={handleChange} className="w-full placeholder:text-sm border border-gray-300 rounded-md px-3 py-2 focus:outline-[#4038C9] transition" placeholder="موضوع پیام خود را وارد نمایید" /></div><br/>
                 <h3 className='font-medium text-gray-700 mb-2 rtl'>پیام</h3>
-                <textarea required name="content" value={formData.content} onChange={handleChange} className='resize-none w-full placeholder:text-sm border border-gray-300 rounded-md px-3 py-2 rtl h-28 focus:outline-blue-600 transform duration-200' placeholder='متن پیام خود را وارد نمایید' /><br/><br/>
-                <button type="submit" disabled={loading} className='bg-[#4038C9] w-full text-white p-2 rounded-md hover:bg-indigo-800 transition disabled:opacity-50 cursor-pointer'>{loading ? 'در حال ارسال...' : 'ارسال پیام'}</button>
+                <textarea required name="content" value={formData.content} onChange={handleChange} className='resize-y w-full placeholder:text-sm border border-gray-300 rounded-md px-3 py-2 rtl h-28 focus:outline-[#4038C9] transition' placeholder='متن پیام خود را وارد نمایید' /><br/><br/>
+                <button type="submit" disabled={loading} className='bg-[#4038C9] w-full text-white p-3 rounded-md font-bold hover:bg-indigo-800 transition disabled:opacity-50 cursor-pointer'>{loading ? 'در حال ارسال...' : 'ارسال پیام'}</button>
             </form>
         </div>
     )
@@ -141,20 +138,27 @@ function ContactForm() {
 
 function MapView() {
     return (
-        <div className='bg-white rounded-xl p-6 shadow-md col-span-1 h-fit overflow-c'>
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d8968.111361140782!2d46.04688157387684!3d37.3731286604971!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x401b22e82dcf35c7%3A0x83c84a0115b6b578!2z2K_Yp9mG2LTar9in2Ycg2KjZhtin2Kg!5e0!3m2!1sen!2s!4v1742911374162!5m2!1sen!2s" className='w-[100%] rounded-xl' allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
+        <div className='bg-white rounded-xl p-2 shadow-inner w-full h-full overflow-hidden'>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3239.531102928172!2d51.4082269!3d35.7130541!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzXCsDQyJzQ3LjAiTiA1McKwMjQnMjkuNiJF!5e0!3m2!1sen!2s!4v1620000000000!5m2!1sen!2s" className='w-full h-full rounded-lg' style={{border: 0, minHeight: '230px'}} allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
         </div>
     )
 }
 
-// --- YOUR EXACT SECTIONS WITH LOCALSTORAGE INSTEAD OF FETCH ---
-
 function Header() {
     const [settings, setSettings] = useState(null);
-    useEffect(() => { setSettings(JSON.parse(localStorage.getItem('settings')) || {}); }, []);
+    useEffect(() => {
+        try {
+            const data = JSON.parse(localStorage.getItem('settings') || '{}');
+            setSettings(data);
+        } catch (e) { setSettings({}); }
+    }, []);
 
     const lawyerName = settings?.lawyer_name || "تیم متخصص ما";
-    const headerDescription = settings?.header_bio || "با بیش از ۱۵ سال تجربه...";
+    const headerDescription = settings?.header_bio || "با بیش از ۱۵ سال تجربه در زمینه‌های مختلف حقوقی...";
+
+    const scrollDown = (id) => {
+        document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+    }
 
     return (
         <header className='relative w-full min-h-[90vh] md:min-h-[600px] flex items-center justify-center overflow-hidden bg-[#3C3A86] rtl'>
@@ -167,8 +171,8 @@ function Header() {
                     <h1 className='text-5xl md:text-6xl lg:text-7xl font-extrabold text-white leading-tight drop-shadow-lg'>وکالت حرفه‌ای با<br/><span className='text-[#FFCA0C] relative inline-block mt-2'>{lawyerName}<svg className="absolute w-full h-3 -bottom-1 left-0 text-[#FFCA0C]/40" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M0 5 Q 50 10 100 5" stroke="currentColor" strokeWidth="4" fill="transparent"/></svg></span></h1>
                     <p className='text-gray-200 text-lg md:text-xl font-light max-w-2xl leading-relaxed opacity-90 line-clamp-3 whitespace-pre-wrap'>{headerDescription}</p>
                     <div className='flex flex-col sm:flex-row gap-4 pt-4 w-full justify-center md:justify-start'>
-                        <a href="#contact" className='inline-block text-center bg-[#FFCA0C] hover:bg-[#E5B50A] text-gray-900 font-bold px-8 py-4 rounded-xl shadow-[0_4px_14px_0_rgba(255,202,12,0.39)] hover:shadow-[0_6px_20px_rgba(255,202,12,0.23)] hover:-translate-y-1 transition-all duration-300'>مشاوره رایگان</a>
-                        <a href="#services" className='inline-block text-center bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/30 text-white font-medium px-8 py-4 rounded-xl hover:-translate-y-1 transition-all duration-300'>خدمات حقوقی</a>
+                        <button onClick={() => scrollDown('contact')} className='inline-block text-center bg-[#FFCA0C] hover:bg-[#E5B50A] text-gray-900 font-bold px-8 py-4 rounded-xl shadow-[0_4px_14px_0_rgba(255,202,12,0.39)] hover:shadow-[0_6px_20px_rgba(255,202,12,0.23)] hover:-translate-y-1 transition-all duration-300 cursor-pointer'>مشاوره رایگان</button>
+                        <button onClick={() => scrollDown('services')} className='inline-block text-center bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/30 text-white font-medium px-8 py-4 rounded-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer'>خدمات حقوقی</button>
                     </div>
                 </div>
                 <div className='hidden md:flex w-full md:w-2/5 justify-end'>
@@ -187,10 +191,15 @@ function Header() {
 
 function AboutPage() {
     const [settings, setSettings] = useState(null);
-    useEffect(() => { setSettings(JSON.parse(localStorage.getItem('settings')) || {}); }, []);
+    useEffect(() => {
+        try {
+            const data = JSON.parse(localStorage.getItem('settings') || '{}');
+            setSettings(data);
+        } catch (e) { setSettings({}); }
+    }, []);
 
-    const lawyerName = settings?.lawyer_name || "محمد حقوقی";
-    const lawyerBio = settings?.lawyer_bio || "من محمد حقوقی، وکیل پایه یک دادگستری...";
+    const lawyerName = settings?.lawyer_name || "تیم تخصصی";
+    const lawyerBio = settings?.lawyer_bio || "توضیحات تکمیلی به زودی اضافه خواهد شد.";
     const lawyerImage = settings?.lawyer_image || lawyerHand;
 
     return (
@@ -206,7 +215,7 @@ function AboutPage() {
                         </div>
                     </div>
                     <div className='w-full lg:w-1/2 flex flex-col items-start'>
-                        <div className="inline-block px-4 py-1.5 rounded-full bg-[#3C3A86]/10 text-[#3C3A86] font-semibold text-sm mb-4 border border-[#3C3A86]/20">آشنایی با {lawyerName}</div>
+                        <div className="inline-block px-4 py-1.5 rounded-full bg-[#3C3A86]/10 text-[#3C3A86] font-semibold text-sm mb-4 border border-[#3C3A86]/20">آشنایی با ما</div>
                         <h2 className='text-4xl md:text-5xl font-black text-gray-900 mb-6'>درباره <span className='text-[#4038C9] relative'>من<span className="absolute bottom-1 left-0 w-full h-2 bg-[#FFCA0C]/40 -z-10 rounded"></span></span></h2>
                         <p className='text-gray-600 text-lg leading-loose mb-8 text-justify whitespace-pre-wrap'>{lawyerBio}</p>
                         <div className='grid grid-cols-1 sm:grid-cols-3 gap-4 w-full mb-8'>
@@ -214,10 +223,10 @@ function AboutPage() {
                             <TwoElementCard icon={caseIcon} text="۵۰۰+ پرونده موفق"/>
                             <TwoElementCard icon={medalIcon} text="۱۵+ سال تجربه"/>
                         </div>
-                        <a href="/#contact" className='group flex items-center gap-2 bg-[#4038C9] hover:bg-[#2C2699] text-white font-medium px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1'>
+                        <button onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })} className='group flex items-center gap-2 bg-[#4038C9] hover:bg-[#2C2699] text-white font-medium px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer'>
                             <span>ارتباط مستقیم با من</span>
                             <svg className="w-5 h-5 transform rotate-180 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                        </a>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -231,14 +240,27 @@ function Services() {
     const [settingsServices, setSettingsServices] = useState([]);
 
     useEffect(() => {
-        const data = JSON.parse(localStorage.getItem('settings')) || {};
-        const parsed = JSON.parse(data?.services_json || '[]');
-        setSettingsServices(parsed);
+        try {
+            const data = JSON.parse(localStorage.getItem('settings') || '{}');
+            const rawServices = data?.services_json;
+            let parsed = [];
+
+            // Safely parse regardless of how it was saved (String vs Array)
+            if (typeof rawServices === 'string') {
+                parsed = JSON.parse(rawServices);
+            } else if (Array.isArray(rawServices)) {
+                parsed = rawServices;
+            }
+
+            setSettingsServices(Array.isArray(parsed) ? parsed : []);
+        } catch (e) {
+            console.error("Failed to load services correctly:", e);
+        }
     }, []);
 
     const defaultLegalIcon = (<svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"></path></svg>);
 
-    if (settingsServices.length === 0) return null;
+    if (!settingsServices || settingsServices.length === 0) return null;
 
     return (
         <section className='relative bg-[#F9FAFB] w-full py-24 overflow-hidden rtl'>
@@ -251,11 +273,11 @@ function Services() {
                 </div>
                 <ul className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
                     {settingsServices.map((each, index) => {
-                        const SelectedIcon = AVAILABLE_ICONS[each.icon];
+                        const SelectedIcon = AVAILABLE_ICONS[each?.icon];
                         return (
                             <li key={index} className="group hover:-translate-y-2 transition-transform duration-300 ease-out h-full">
                                 <div className="h-full bg-white rounded-2xl shadow-sm hover:shadow-2xl border border-gray-100 transition-shadow duration-300 overflow-hidden">
-                                    <ThreeElementCard title={each.title} description={each.desc || each.description || ''}>
+                                    <ThreeElementCard title={each?.title || 'بدون عنوان'} description={each?.desc || each?.description || ''}>
                                         <div className="text-[#4038C9] group-hover:scale-110 transition-transform duration-300">
                                             {SelectedIcon ? <SelectedIcon sx={{ fontSize: 48 }} /> : defaultLegalIcon}
                                         </div>
@@ -276,9 +298,22 @@ function Comments() {
     const [settingsComments, setSettingsComments] = useState([]);
 
     useEffect(() => {
-        const data = JSON.parse(localStorage.getItem('settings')) || {};
-        const parsed = JSON.parse(data?.testimonials_json || '[]');
-        setSettingsComments(parsed);
+        try {
+            const data = JSON.parse(localStorage.getItem('settings') || '{}');
+            const rawComments = data?.testimonials_json;
+            let parsed = [];
+
+            // Safely parse regardless of how it was saved (String vs Array)
+            if (typeof rawComments === 'string') {
+                parsed = JSON.parse(rawComments);
+            } else if (Array.isArray(rawComments)) {
+                parsed = rawComments;
+            }
+
+            setSettingsComments(Array.isArray(parsed) ? parsed : []);
+        } catch (e) {
+            console.error("Failed to parse testimonials correctly:", e);
+        }
     }, []);
 
     useEffect(() => {
@@ -298,23 +333,23 @@ function Comments() {
         }, 300);
     };
 
-    if (settingsComments.length === 0) return null;
+    if (!settingsComments || settingsComments.length === 0) return null;
 
     const safeMenuState = menuState < settingsComments.length ? menuState : 0;
     const currentComment = settingsComments[safeMenuState] || {};
 
     const getAvatarPic = (comment) => {
-        if (comment.image && comment.image.length > 100) return comment.image;
+        if (comment?.image && comment.image.length > 100) return comment.image;
         const maleAvatar = "data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%234038C9'%3E%3Cpath d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/%3E%3C/svg%3E";
         const femaleAvatar = "data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23C9388B'%3E%3Cpath d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/%3E%3C/svg%3E";
-        if (comment.avatar === 'female') return femaleAvatar;
-        if (comment.avatar === 'male') return maleAvatar;
+        if (comment?.avatar === 'female') return femaleAvatar;
+        if (comment?.avatar === 'male') return maleAvatar;
         return fallbackPic;
     };
 
     return (
         <section className='bg-white w-full py-24 relative overflow-hidden rtl'>
-            <div className="absolute top-10 right-10 md:top-20 md:right-32 text-[#F9FAFB] z-0 opacity-80" style={{ fontSize: '20rem', lineHeight: '1', fontFamily: 'serif' }}>&rdquo;</div>
+            <div className="absolute top-10 right-10 md:top-20 md:right-32 text-[#F9FAFB] z-0 opacity-80" style={{ fontSize: '20rem', lineHeight: '1', fontFamily: 'serif' }}>”</div>
             <div className='max-w-5xl mx-auto px-6 lg:px-8 relative z-10 flex flex-col items-center'>
                 <div className='text-center mb-12'>
                     <div className="inline-block px-4 py-1.5 rounded-full bg-[#3C3A86]/10 text-[#3C3A86] font-semibold text-sm mb-4">تجربیات موفق</div>
@@ -323,13 +358,13 @@ function Comments() {
                 </div>
                 <div className={`w-full transition-opacity duration-300 ease-in-out ${isFading ? 'opacity-0 scale-95' : 'opacity-100 scale-100'}`}>
                     <div className="bg-white rounded-3xl p-8 md:p-12 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100">
-                        <FourElementCard comment={currentComment.text || currentComment.comment || ''} name={currentComment.name || 'موکل ناشناس'} position={currentComment.position || "موکل"} picture={getAvatarPic(currentComment)} />
+                        <FourElementCard comment={currentComment?.text || currentComment?.comment || ''} name={currentComment?.name || 'موکل ناشناس'} position={currentComment?.position || "موکل"} picture={getAvatarPic(currentComment)} />
                     </div>
                 </div>
                 {settingsComments.length > 1 && (
                     <div className='flex flex-row items-center gap-3 mt-10'>
                         {settingsComments.map((_, index) => (
-                            <button key={index} onClick={() => handleSlideChange(index)} aria-label={`View comment ${index + 1}`} className="focus:outline-none p-2">
+                            <button key={index} onClick={() => handleSlideChange(index)} aria-label={`View comment ${index + 1}`} className="focus:outline-none p-2 cursor-pointer">
                                 <div className={`transition-all duration-300 rounded-full ${safeMenuState === index ? 'w-8 h-2.5 bg-[#FFCA0C] shadow-[0_0_10px_rgba(255,202,12,0.5)]' : 'w-2.5 h-2.5 bg-gray-200 hover:bg-gray-300'}`} />
                             </button>
                         ))}
@@ -355,7 +390,7 @@ function ContactUs() {
                             <h3 className="text-3xl font-black mb-8 text-white flex items-center gap-3"><div className="w-2 h-8 bg-[#FFCA0C] rounded-full"></div>اطلاعات تماس</h3>
                             <div className="text-gray-50 space-y-6 font-medium"><ContactInfo /></div>
                         </div>
-                        <div className="mt-12 relative z-10 rounded-xl overflow-hidden shadow-2xl border border-white/20 h-64 w-full bg-gray-200"><MapView /></div>
+                        <div className="mt-12 relative z-10 rounded-xl shadow-2xl border border-white/20 w-full flex-grow"><MapView /></div>
                     </div>
                     <div className='w-full lg:w-7/12 p-8 md:p-12 lg:p-16'>
                         <h3 className="text-3xl font-black mb-6 text-black border-b-2 border-gray-100 pb-4">ارسال پیام مستقیم</h3>
@@ -368,7 +403,6 @@ function ContactUs() {
     );
 }
 
-// --- YOUR EXACT HOMEPAGE COMPONENT ---
 function Homepage() {
     return (
         <div className='relative'>

@@ -1,15 +1,14 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import '@fontsource/vazirmatn'
-import './index.css'
+import React from 'react'
+import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
-import { initializeMockDB } from './data.js'
+import './index.css'
+import { initializeMockData } from './mockSeeder.js'
 
-// Initialize the static mock database in localStorage
-initializeMockDB();
+// Inject mock data for GitHub Pages visitors
+initializeMockData();
 
-createRoot(document.getElementById('root')).render(
-    <StrictMode>
+ReactDOM.createRoot(document.getElementById('root')).render(
+    <React.StrictMode>
         <App />
-    </StrictMode>,
+    </React.StrictMode>,
 )
