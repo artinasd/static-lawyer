@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme {
-    --font-sans: 'Vazirmatn', sans-serif;
+    --font-sans: "Vazirmatn", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
 .rtl {
@@ -24,4 +24,9 @@
     html {
         scroll-behavior: smooth;
     }
+}
+
+body {
+    font-family: "Vazirmatn", sans-serif;
+    background-color: #F9FAFB;
 }
