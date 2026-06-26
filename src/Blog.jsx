@@ -17,7 +17,7 @@ function BlogHeader() {
     return (
         <div className='relative mt-16'>
             <div className='w-full max-h-96 overflow-y-clip'>
-                <img className='w-full' src={HeaderPic} alt="Header" />
+                <img className='w-full object-cover' src={HeaderPic} alt="Header" />
                 <div className="absolute bottom-0 w-full h-64 bg-gradient-to-b from-transparent to-gray-50 pointer-events-none" />
             </div>
             <div className='absolute flex flex-col items-center justify-end pb-10 inset-0'>
@@ -100,7 +100,7 @@ export function BlogLanding() {
                             <>
                                 <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-20 rtl'>
                                     {currentPosts.map((post) => {
-                                        if (!post) return null; // Safe guard against null items in array
+                                        if (!post) return null;
                                         return (
                                             <BlogPostCard
                                                 key={post.id || Math.random()}
@@ -143,6 +143,7 @@ export function BlogLanding() {
 
 export function BlogPost() {
     const { postId } = useParams();
+    const navigate = useNavigate();
     const [post, setPost] = useState(null);
     const [recentPosts, setRecentPosts] = useState([]);
     const [siteSettings, setSiteSettings] = useState(null);
@@ -156,7 +157,6 @@ export function BlogPost() {
         setLoading(true);
 
         try {
-            // Load and parse settings safely
             const settingsRaw = localStorage.getItem('settings');
             let settings = {};
             if (settingsRaw) {
@@ -164,7 +164,6 @@ export function BlogPost() {
             }
             setSiteSettings(settings);
 
-            // Load and parse posts safely
             const allPostsRaw = localStorage.getItem('posts');
             let allPosts = [];
             if (allPostsRaw) {
@@ -172,15 +171,12 @@ export function BlogPost() {
             }
             if (!Array.isArray(allPosts)) allPosts = [];
 
-            // Find current post - ensure p.id is evaluated safely
             const currentPost = allPosts.find(p => p && String(p.id) === String(postId));
             setPost(currentPost || null);
 
-            // Set Recent posts safely
             const otherPosts = allPosts.filter(p => p && String(p.id) !== String(postId)).slice(0, 5);
             setRecentPosts(otherPosts);
 
-            // Load and parse comments safely
             const allCommentsRaw = localStorage.getItem('comments');
             let allComments = [];
             if (allCommentsRaw) {
@@ -243,6 +239,17 @@ export function BlogPost() {
     return (
         <div className="max-w-7xl mx-auto p-4 flex flex-col md:flex-row gap-8 mt-10 mb-24" dir="rtl">
             <main className="md:w-3/4 flex flex-col gap-8">
+                {/* Back to Blog Button */}
+                <div className="mb-[-15px]">
+                    <button
+                        onClick={() => navigate('/blog')}
+                        className="text-gray-500 hover:text-[#4038C9] font-bold flex items-center gap-2 transition-colors duration-200 cursor-pointer"
+                    >
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path></svg>
+                        بازگشت به لیست مقالات
+                    </button>
+                </div>
+
                 <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
                     {post.image && <img src={post.image} alt={post.title} className="w-full h-auto max-h-[500px] object-cover rounded-xl mb-8 shadow-sm" />}
                     <h1 className="text-4xl font-bold mb-6 text-gray-900 leading-tight">{post.title || 'بدون عنوان'}</h1>

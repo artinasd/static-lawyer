@@ -111,6 +111,16 @@ function ContactForm() {
         setLoading(true);
         setStatus(null);
         setTimeout(() => {
+            // Write to mock DB so the admin panel gets updated
+            const existingMessages = JSON.parse(localStorage.getItem('messages') || '[]');
+            existingMessages.push({
+                id: Date.now(),
+                ...formData,
+                created_at: new Date().toISOString(),
+                is_read: false
+            });
+            localStorage.setItem('messages', JSON.stringify(existingMessages));
+
             setStatus('success');
             setFormData({ name: '', email: '', phone: '', subject: '', content: '' });
             setLoading(false);
@@ -139,7 +149,8 @@ function ContactForm() {
 function MapView() {
     return (
         <div className='bg-white rounded-xl p-2 shadow-inner w-full h-full overflow-hidden'>
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3239.531102928172!2d51.4082269!3d35.7130541!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzXCsDQyJzQ3LjAiTiA1McKwMjQnMjkuNiJF!5e0!3m2!1sen!2s!4v1620000000000!5m2!1sen!2s" className='w-full h-full rounded-lg' style={{border: 0, minHeight: '230px'}} allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
+            {/* FIXED HTTPS Map URL so GitHub Pages won't block it */}
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3239.967399815456!2d51.40871311525997!3d35.70295198018903!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3f8e0114b0b8c6a5%3A0x6318357f89b9d36!2sTehran%20Province%2C%20Tehran%2C%20Enghelab%20Sq%2C%20Iran!5e0!3m2!1sen!2s!4v1692200000000!5m2!1sen!2s" className='w-full h-full rounded-lg' style={{border: 0, minHeight: '230px'}} allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
         </div>
     )
 }
@@ -245,7 +256,6 @@ function Services() {
             const rawServices = data?.services_json;
             let parsed = [];
 
-            // Safely parse regardless of how it was saved (String vs Array)
             if (typeof rawServices === 'string') {
                 parsed = JSON.parse(rawServices);
             } else if (Array.isArray(rawServices)) {
@@ -303,7 +313,6 @@ function Comments() {
             const rawComments = data?.testimonials_json;
             let parsed = [];
 
-            // Safely parse regardless of how it was saved (String vs Array)
             if (typeof rawComments === 'string') {
                 parsed = JSON.parse(rawComments);
             } else if (Array.isArray(rawComments)) {
@@ -316,11 +325,14 @@ function Comments() {
         }
     }, []);
 
+    // FIX: Passing menuState in dependency array resets the timer when user clicks manually!
     useEffect(() => {
         if (settingsComments.length <= 1) return;
-        const timer = setInterval(() => handleSlideChange((prev) => (prev < settingsComments.length - 1 ? prev + 1 : 0)), 5000);
+        const timer = setInterval(() => {
+            handleSlideChange((prev) => (prev < settingsComments.length - 1 ? prev + 1 : 0));
+        }, 5000);
         return () => clearInterval(timer);
-    }, [settingsComments.length]);
+    }, [settingsComments.length, menuState]);
 
     const handleSlideChange = (newIndex) => {
         setIsFading(true);
